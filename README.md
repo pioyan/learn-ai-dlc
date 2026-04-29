@@ -1,85 +1,49 @@
-<section class="landing-hero">
-    <p class="landing-eyebrow">AI-Driven Development Lifecycle Learning Hub</p>
-    <h1>AI-DLC を、理解から実践までつなぐ学習ポータル</h1>
-    <p>概念整理、90日ロードマップ、モブワーク実践例、用語集、アンチパターン、確認クイズまでを一つの導線で学べるドキュメント集です。最短で全体像を掴み、そのまま現場の実践に接続できる構成にしています。</p>
-    <div class="action-row">
-        <a class="button button-primary" href="#/03_学習サポート/A_学習ロードマップ">ロードマップから始める</a>
-        <a class="button button-secondary" href="#/03_学習サポート/H_概念図ダイアグラム">概念図で俯瞰する</a>
-        <a class="button button-secondary" href="#/02_モブワーク実践事例/INDEX">実践シナリオを見る</a>
-    </div>
-    <div class="stat-row">
-        <span class="stat-pill">基礎ドキュメント 2本</span>
-        <span class="stat-pill">実践事例 5本</span>
-        <span class="stat-pill">学習サポート 8本</span>
-    </div>
-</section>
+# AI-DLC を、理解から実践までつなぐ学習ポータル
+
+AI-Driven Development Lifecycle (AI-DLC) を理解し、実務で試すための学習リポジトリです。概念整理、90日ロードマップ、モブワーク実践例、用語集、アンチパターン、確認クイズまでを一つの導線で追える構成にしています。
+
+## このリポジトリでできること
+
+- AI-DLC の全体像を短時間で把握する
+- 実践シナリオごとの進め方を読む
+- 前提知識、用語、アンチパターンを参照する
+- 学習順序に沿って段階的に進める
 
 ## どこから読むか
 
-<div class="card-grid">
-    <a class="card" href="#/03_学習サポート/A_学習ロードマップ">
-        <strong>初学者向けスタート</strong>
-        <span>最初に何をどの順で学べばよいかを短時間で把握します。迷わず入りたい人向けです。</span>
-        <span class="card-meta">10分で全体の学習順序を掴む</span>
-    </a>
-    <a class="card" href="#/03_学習サポート/H_概念図ダイアグラム">
-        <strong>まず全体像を見たい</strong>
-        <span>AI-DLC の構成要素と関係性を Mermaid 図で俯瞰し、学習対象の地図を先に作ります。</span>
-        <span class="card-meta">構造理解を先に固める</span>
-    </a>
-    <a class="card" href="#/01_基礎/AI-DLC_理解と実践ガイド">
-        <strong>体系的に理解したい</strong>
-        <span>AI-DLC の考え方、進め方、90日ロードマップまでをまとめて読み進められます。</span>
-        <span class="card-meta">通読向けの中核ドキュメント</span>
-    </a>
-    <a class="card" href="#/02_モブワーク実践事例/INDEX">
-        <strong>実践から入りたい</strong>
-        <span>要件整理、グリーンフィールド、レガシー改善など、状況別の進め方を選べます。</span>
-        <span class="card-meta">シナリオ別に読む</span>
-    </a>
-</div>
+| 目的 | ドキュメント | 内容 |
+|---|---|---|
+| 最初に全体像を掴みたい | [A. 学習ロードマップ](03_学習サポート/A_学習ロードマップ.md) | 学習順序と到達目標を確認する |
+| 構造を図で見たい | [H. 概念図ダイアグラム](03_学習サポート/H_概念図ダイアグラム.md) | Intent / Unit / Bolt や Mob Construction の流れを俯瞰する |
+| 体系的に理解したい | [AI-DLC_理解と実践ガイド](01_基礎/AI-DLC_理解と実践ガイド.md) | 概要から 90 日ロードマップまでを通読する |
+| 実践例から入りたい | [実践事例一覧](02_モブワーク実践事例/INDEX.md) | 状況別のシナリオを選ぶ |
 
 ## おすすめの進め方
 
-<div class="card-grid">
-    <article class="card">
-        <strong>1. 全体像を作る</strong>
-        <span><a href="#/03_学習サポート/A_学習ロードマップ">学習ロードマップ</a> と <a href="#/03_学習サポート/H_概念図ダイアグラム">概念図ダイアグラム</a> を先に読み、AI-DLC の輪郭を掴みます。</span>
-    </article>
-    <article class="card">
-        <strong>2. 基礎を通しで理解する</strong>
-        <span><a href="#/01_基礎/AI-DLC_理解と実践ガイド">理解と実践ガイド</a> を軸に、必要に応じて <a href="#/01_基礎/AI-DLC_Method_Definition_ja">方法論定義</a> を参照します。</span>
-    </article>
-    <article class="card">
-        <strong>3. 現場に寄せて試す</strong>
-        <span><a href="#/02_モブワーク実践事例/INDEX">実践事例一覧</a> から近いシナリオを選び、フェーズごとの進め方に落とし込みます。</span>
-    </article>
-    <article class="card">
-        <strong>4. 詰まりどころを潰す</strong>
-        <span><a href="#/03_学習サポート/B_用語集">用語集</a>、<a href="#/03_学習サポート/F_アンチパターン集">アンチパターン集</a>、<a href="#/03_学習サポート/G_自己確認クイズ">自己確認クイズ</a> で理解を定着させます。</span>
-    </article>
-</div>
+1. [学習ロードマップ](03_学習サポート/A_学習ロードマップ.md) と [概念図ダイアグラム](03_学習サポート/H_概念図ダイアグラム.md) で全体像を掴む。
+2. [AI-DLC_理解と実践ガイド](01_基礎/AI-DLC_理解と実践ガイド.md) を読み、必要に応じて [AI-DLC_Method_Definition_ja](01_基礎/AI-DLC_Method_Definition_ja.md) を参照する。
+3. [実践事例一覧](02_モブワーク実践事例/INDEX.md) から自分の状況に近いシナリオを選ぶ。
+4. 詰まったら [用語集](03_学習サポート/B_用語集.md)、[前提知識チェックリスト](03_学習サポート/C_前提知識チェックリスト.md)、[アンチパターン集](03_学習サポート/F_アンチパターン集.md)、[自己確認クイズ](03_学習サポート/G_自己確認クイズ.md) を使う。
 
 ## ドキュメントの構成
 
-<div class="card-grid">
-    <a class="card" href="#/01_基礎/AI-DLC_理解と実践ガイド">
-        <strong>01 基礎</strong>
-        <span>AI-DLC の理論、方法論、実践ガイドをまとめた土台のセクションです。まず骨格を理解したいときに使います。</span>
-        <span class="card-meta">理論と方法論を押さえる</span>
-    </a>
-    <a class="card" href="#/02_モブワーク実践事例/INDEX">
-        <strong>02 モブワーク実践事例</strong>
-        <span>要件明確化、グリーンフィールド、ブラウンフィールド、マイクロサービス化、セキュリティ重視実装を扱います。</span>
-        <span class="card-meta">現場シナリオ別に進める</span>
-    </a>
-    <a class="card" href="#/03_学習サポート/A_学習ロードマップ">
-        <strong>03 学習サポート</strong>
-        <span>ロードマップ、用語集、チェックリスト、比較、プロンプト設計、アンチパターン、クイズ、概念図を収録しています。</span>
-        <span class="card-meta">迷ったときの参照先</span>
-    </a>
-</div>
+| セクション | 主な内容 | 読みどころ |
+|---|---|---|
+| [01 基礎](01_基礎/AI-DLC_理解と実践ガイド.md) | 方法論定義、理解と実践ガイド | 理論と方法論の土台 |
+| [02 モブワーク実践事例](02_モブワーク実践事例/INDEX.md) | Elaboration, Construction, Brownfield, Microservice, Security | 現場シナリオ別の進め方 |
+| [03 学習サポート](03_学習サポート/A_学習ロードマップ.md) | ロードマップ、用語集、チェックリスト、比較、プロンプト設計、アンチパターン、クイズ、概念図 | 学習時の参照資料 |
 
-<div class="section-note">
-    実践で行き詰まったら、先に <a href="#/03_学習サポート/F_アンチパターン集">アンチパターン集</a> を確認すると、典型的な失敗を避けながら読み進めやすくなります。前提知識が不安なら <a href="#/03_学習サポート/C_前提知識チェックリスト">前提知識チェックリスト</a> から入るのが最短です。
-</div>
+## ドキュメント数
+
+- 基礎ドキュメント: 2本
+- 実践事例: 5本
+- 学習サポート: 8本
+
+## 公開サイト
+
+- GitHub Pages: https://pioyan.github.io/learn-ai-dlc/#/
+
+## 補足
+
+- GitHub 上では各ドキュメントの相対リンクから直接読めます。
+- Docsify 上でも同じリンクがそのままルーティングされます。
