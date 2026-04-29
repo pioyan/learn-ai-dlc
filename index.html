@@ -1418,10 +1418,130 @@
         }
       }
 
+      var sidebarHeadingSyncState = {
+        cleanup: null,
+      };
+
+      function clearSidebarHeadingSync() {
+        if (sidebarHeadingSyncState.cleanup) {
+          sidebarHeadingSyncState.cleanup();
+          sidebarHeadingSyncState.cleanup = null;
+        }
+      }
+
+      function normalizeDocsRoute(route) {
+        return decodeURIComponent(String(route || '').replace(/^#/, '').split('?')[0]);
+      }
+
+      function findCurrentSidebarPageLink(routePath) {
+        var links = document.querySelectorAll('.sidebar a');
+        var normalizedTargetRoute = normalizeDocsRoute(routePath);
+
+        return Array.prototype.find.call(links, function (link) {
+          return normalizeDocsRoute(link.getAttribute('href')) === normalizedTargetRoute;
+        }) || null;
+      }
+
+      function findActiveHeadingId(headings) {
+        var threshold = 180;
+        var activeHeading = headings[0] || null;
+
+        headings.forEach(function (heading) {
+          if (heading.getBoundingClientRect().top <= threshold) {
+            activeHeading = heading;
+          }
+        });
+
+        return activeHeading ? activeHeading.id : '';
+      }
+
+      function syncSidebarHeadings(vm, isHome) {
+        clearSidebarHeadingSync();
+
+        if (isHome) {
+          return;
+        }
+
+        var routePath = normalizeDocsRoute(location.hash || ((vm.route && vm.route.path) || ''));
+        if (!routePath) {
+          return;
+        }
+
+        var currentPageLink = findCurrentSidebarPageLink(routePath);
+        if (!currentPageLink || !currentPageLink.parentElement) {
+          return;
+        }
+
+        var sidebarHeadingLinks = Array.prototype.filter.call(
+          currentPageLink.parentElement.querySelectorAll('ul a[href*="?id="]'),
+          function (link) {
+            return normalizeDocsRoute(link.getAttribute('href')) === routePath;
+          }
+        );
+        var headings = Array.prototype.filter.call(
+          document.querySelectorAll('.markdown-section h2[id], .markdown-section h3[id], .markdown-section h4[id]'),
+          function (heading) {
+            return !!heading.id;
+          }
+        );
+
+        if (!sidebarHeadingLinks.length || !headings.length) {
+          return;
+        }
+
+        var ticking = false;
+
+        function updateActiveHeadingLink() {
+          ticking = false;
+
+          var activeHeadingId = findActiveHeadingId(headings);
+
+          sidebarHeadingLinks.forEach(function (link) {
+            var item = link.parentElement;
+            if (!item) {
+              return;
+            }
+
+            var href = link.getAttribute('href') || '';
+            var linkHeadingId = decodeURIComponent((href.split('?id=')[1] || '').trim());
+            var isActive = linkHeadingId === activeHeadingId;
+
+            item.classList.toggle('active', isActive);
+            if (isActive) {
+              link.setAttribute('aria-current', 'location');
+            } else {
+              link.removeAttribute('aria-current');
+            }
+          });
+        }
+
+        function requestHeadingSync() {
+          if (ticking) {
+            return;
+          }
+
+          ticking = true;
+          requestAnimationFrame(updateActiveHeadingLink);
+        }
+
+        window.addEventListener('scroll', requestHeadingSync, { passive: true });
+        window.addEventListener('resize', requestHeadingSync);
+        window.addEventListener('hashchange', requestHeadingSync);
+
+        requestHeadingSync();
+
+        sidebarHeadingSyncState.cleanup = function () {
+          window.removeEventListener('scroll', requestHeadingSync);
+          window.removeEventListener('resize', requestHeadingSync);
+          window.removeEventListener('hashchange', requestHeadingSync);
+        };
+      }
+
       window.__docsUiEnhancer = {
         refresh: function (vm, isHome) {
           requestAnimationFrame(function () {
             enhancePageChrome(vm, isHome);
+            syncSidebarHeadings(vm, isHome);
             installSearchObserver();
             window.setTimeout(sanitizeSearchResults, 80);
           });
