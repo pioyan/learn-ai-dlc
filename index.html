@@ -1568,14 +1568,27 @@
             return normalizeDocsRoute(link.getAttribute('href')) === routePath;
           }
         );
+        var sidebarHeadingIdSet = sidebarHeadingLinks.reduce(function (ids, link) {
+          var href = link.getAttribute('href') || '';
+          var headingId = decodeURIComponent((href.split('?id=')[1] || '').trim());
+
+          if (headingId) {
+            ids[headingId] = true;
+          }
+
+          return ids;
+        }, {});
         var headings = Array.prototype.filter.call(
           document.querySelectorAll('.markdown-section h2[id], .markdown-section h3[id], .markdown-section h4[id]'),
           function (heading) {
             return !!heading.id;
           }
         );
+        var trackedHeadings = headings.filter(function (heading) {
+          return !!sidebarHeadingIdSet[heading.id];
+        });
 
-        if (!sidebarHeadingLinks.length || !headings.length) {
+        if (!sidebarHeadingLinks.length || !trackedHeadings.length) {
           return;
         }
 
@@ -1584,15 +1597,16 @@
         function updateActiveHeadingLink() {
           ticking = false;
 
-          var activeHeadingId = findActiveHeadingId(headings);
+          var activeHeadingId = findActiveHeadingId(trackedHeadings);
           var lockedHeadingId = sidebarHeadingSyncState.lockedHeadingId;
           var lockedHeading = lockedHeadingId ? findHeadingById(headings, lockedHeadingId) : null;
 
-          if (lockedHeading) {
+          if (lockedHeading && sidebarHeadingIdSet[lockedHeadingId]) {
             activeHeadingId = lockedHeadingId;
-            if (isHeadingInActiveZone(lockedHeading)) {
-              sidebarHeadingSyncState.lockedHeadingId = '';
-            }
+          }
+
+          if (lockedHeading && isHeadingInActiveZone(lockedHeading)) {
+            sidebarHeadingSyncState.lockedHeadingId = '';
           }
 
           var activeSidebarLink = null;
