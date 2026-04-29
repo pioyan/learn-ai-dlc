@@ -658,29 +658,29 @@ class RecommendationService:
 【レビュー項目チェックリスト】
 
 Domain & Architecture:
- ☑ Domain Model クラスが正しく使われているか
- ☑ リポジトリ層が抽象化されているか
- ☑ ビジネスロジック層と AWS 依存が分離しているか
+- [ ] Domain Model クラスが正しく使われているか
+- [ ] リポジトリ層が抽象化されているか
+- [ ] ビジネスロジック層と AWS 依存が分離しているか
 
 Performance:
- ☑ DynamoDB クエリ数が最小化されているか
- ☑ キャッシュヒット率が高いか
- ☑ 並列化できる部分を実装しているか
+- [ ] DynamoDB クエリ数が最小化されているか
+- [ ] キャッシュヒット率が高いか
+- [ ] 並列化できる部分を実装しているか
 
 Testing:
- ☑ ユニットテストカバレッジ 80% 以上か
- ☑ エッジケース（購買なし、キャッシュミスなど）をテストしているか
- ☑ Mock/Stub が適切か
+- [ ] ユニットテストカバレッジ 80% 以上か
+- [ ] エッジケース（購買なし、キャッシュミスなど）をテストしているか
+- [ ] Mock/Stub が適切か
 
 Observability:
- ☑ ログレベルが適切か（DEBUG/INFO/ERROR/CRITICAL）
- ☑ トレーサビリティ ID（correlation ID）を含めているか
- ☑ メトリクス出力があるか
+- [ ] ログレベルが適切か（DEBUG/INFO/ERROR/CRITICAL）
+- [ ] トレーサビリティ ID（correlation ID）を含めているか
+- [ ] メトリクス出力があるか
 
 Security:
- ☑ AWS IAM ロール権限が最小化されているか（最小権限原則）
- ☑ 顧客 ID のバリデーションがあるか
- ☑ シークレット管理が適切か（ハードコード値なし）
+- [ ] AWS IAM ロール権限が最小化されているか（最小権限原則）
+- [ ] 顧客 ID のバリデーションがあるか
+- [ ] シークレット管理が適切か（ハードコード値なし）
 ```
 
 ---
@@ -851,10 +851,10 @@ class RecommendationUser(HttpUser):
 Target: p99 Latency < 200ms, Success Rate > 99.5%
 
 Results:
-- p50 Latency: 42ms ✓
-- p95 Latency: 89ms ✓
-- p99 Latency: 156ms ✓
-- Error Rate: 0.2% ✓
+- p50 Latency: 42ms
+- p95 Latency: 89ms
+- p99 Latency: 156ms
+- Error Rate: 0.2%
 
 Bottleneck: DynamoDB read capacity（RCU が 80% 使用）
 → Action: DynamoDB キャパシティ +50 RCU
@@ -865,15 +865,15 @@ Bottleneck: DynamoDB read capacity（RCU が 80% 使用）
 ### Mob Construction チェックリスト
 
 ```markdown
-□ Domain Model 確定
-□ Logical Architecture 確定（ADR 記録）
-□ コード生成＆レビュー完了
-□ ユニットテスト 80% 以上カバレッジ
-□ Integration テスト Pass
-□ 負荷テスト Pass（SLA 達成）
-□ コード品質ゲート Pass（Sonarqube, etc）
-□ セキュリティスキャン Pass
-□ デプロイ手順書作成
+- [ ] Domain Model 確定
+- [ ] Logical Architecture 確定（ADR 記録）
+- [ ] コード生成＆レビュー完了
+- [ ] ユニットテスト 80% 以上カバレッジ
+- [ ] Integration テスト Pass
+- [ ] 負荷テスト Pass（SLA 達成）
+- [ ] コード品質ゲート Pass（Sonarqube, etc）
+- [ ] セキュリティスキャン Pass
+- [ ] デプロイ手順書作成
 ```
 
 ---

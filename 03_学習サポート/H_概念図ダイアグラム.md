@@ -8,7 +8,7 @@
 
 ```mermaid
 flowchart TD
-    A[📋 Intent 定義\nビジネス目標・KPI・スコープ] --> B[Mob Elaboration\n要件明確化 Workshop]
+    A[Intent 定義\nビジネス目標・KPI・スコープ] --> B[Mob Elaboration\n要件明確化 Workshop]
     B --> C[Unit 分解\n独立構築可能な機能単位]
     C --> D[Bolt 計画\n時間単位の最小実装]
 
@@ -17,7 +17,7 @@ flowchart TD
     F -- 次の Bolt --> E
     F -- Unit 完了 --> G{Intent 達成?}
     G -- 次の Unit --> D
-    G -- 全 Unit 完了 --> H[🚀 Operations\n本番稼働・監視・改善]
+    G -- 全 Unit 完了 --> H[Operations\n本番稼働・監視・改善]
     H --> I{Intent 更新?}
     I -- 新 Intent --> A
     I -- 継続改善 --> H
@@ -33,7 +33,7 @@ flowchart TD
 
 ```mermaid
 graph TD
-    I["🎯 Intent\n推薦エンジンで購買単価 +15%\n期間: 3ヶ月"]
+    I["Intent\n推薦エンジンで購買単価 +15%\n期間: 3ヶ月"]
 
     I --> UA["Unit-A\nメール通知サービス\n1〜2週間"]
     I --> UB["Unit-B\n行動ログ収集\n1〜3週間"]
@@ -63,15 +63,15 @@ graph TD
 
 ```mermaid
 flowchart LR
-    A["📝 Bolt 選択\n次に作るものを決める"] --> B["🤖 AI に指示\nプロンプト設計・送信"]
-    B --> C["💻 コード生成\nAI がドラフトを出力"]
-    C --> D["👥 Mob レビュー\nチームで確認・議論"]
+    A["Bolt 選択\n次に作るものを決める"] --> B["AI に指示\nプロンプト設計・送信"]
+    B --> C["コード生成\nAI がドラフトを出力"]
+    C --> D["Mob レビュー\nチームで確認・議論"]
     D --> E{品質OK?}
     E -- 修正指示 --> B
-    E -- OK --> F["✅ テスト実行\nユニット + 統合テスト"]
+    E -- OK --> F["テスト実行\nユニット + 統合テスト"]
     F --> G{テスト通過?}
     G -- 失敗 --> B
-    G -- 通過 --> H["📦 マージ & デプロイ\n次の Bolt へ"]
+    G -- 通過 --> H["マージ & デプロイ\n次の Bolt へ"]
     H --> A
 ```
 

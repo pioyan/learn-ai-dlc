@@ -514,32 +514,32 @@ CREATE INDEX idx_payment_history_date ON PAYMENT_HISTORY(TRANSACTION_DATE, CUSTO
 ```markdown
 ## Security Checklist
 
-□ SQL Injection 対策
-  - Prepared Statement 使用: ✓
-  - パラメータバインディング: ✓
+- [x] SQL Injection 対策
+    - [x] Prepared Statement 使用
+    - [x] パラメータバインディング
 
-□ Authentication/Authorization
-  - CSR には VIEW 権限のみ: ✓
-  - 顧客自身は自分のデータのみ: ✓
-  - Admin 権限チェック: ✓
+- [x] Authentication/Authorization
+    - [x] CSR には VIEW 権限のみ
+    - [x] 顧客自身は自分のデータのみ
+    - [x] Admin 権限チェック
 
-□ データ保護
-  - PII (個人識別情報) のログ出力なし: ✓
-  - 通信 SSL/TLS 強制: ✓
-  - データベース接続パスワード管理: ✓
+- [x] データ保護
+    - [x] PII (個人識別情報) のログ出力なし
+    - [x] 通信 SSL/TLS 強制
+    - [x] データベース接続パスワード管理
 
-□ 監査ログ
-  - 誰が、何を、いつ見たか記録: ✓
-  - GDPR 要件対応: ✓
+- [x] 監査ログ
+    - [x] 誰が、何を、いつ見たか記録
+    - [x] GDPR 要件対応
 ```
 
 ---
 
 ## ブラウンフィールド Mob の特徴
 
-✓ 既存コード理解に時間をかける（短縮不可）
-✓ 逆解析ツール（AI）を活用して効率化
-✓ Domain Model は「理想形」から設計し、段階導入
-✓ Old API と新 API の共存期間をしっかり計画
-✓ Canary Deploy で低リスク移行
-✓ パフォーマンス改善を可視化して信頼獲得
+- 既存コード理解に時間をかける（短縮不可）
+- 逆解析ツール（AI）を活用して効率化
+- Domain Model は「理想形」から設計し、段階導入
+- Old API と新 API の共存期間をしっかり計画
+- Canary Deploy で低リスク移行
+- パフォーマンス改善を可視化して信頼獲得

@@ -488,40 +488,40 @@ trivy image financial-api:latest
 ## PCI DSS / ISO 27001 Compliance Checklist
 
 ### Authentication & Access Control
-☑ 全 API エンドポイントで認証必須
-☑ OAuth 2.0 + JWT 実装
-☑ パスワード要件: 最小 12 文字
-☑ アクセス制御: RBAC 実装
-☑ 定期的な権限レビュー
+- [x] 全 API エンドポイントで認証必須
+- [x] OAuth 2.0 + JWT 実装
+- [x] パスワード要件: 最小 12 文字
+- [x] アクセス制御: RBAC 実装
+- [x] 定期的な権限レビュー
 
 ### Encryption
-☑ 転送中: TLS 1.3 (All endpoints HTTPS-only)
-☑ 保存時: AES-256 (KMS key rotation: 年 1 回)
-☑ バックアップ暗号化
-☑ キー管理: AWS KMS
+- [x] 転送中: TLS 1.3 (All endpoints HTTPS-only)
+- [x] 保存時: AES-256 (KMS key rotation: 年 1 回)
+- [x] バックアップ暗号化
+- [x] キー管理: AWS KMS
 
 ### Logging & Monitoring
-☑ 全トランザクションログ記録
-☑ ログ保持: 最小 7 年
-☑ ログ改ざん検知（ハッシュチェーン）
-☑ Real-time alerting (失敗率 > 1%, SLA 違反)
+- [x] 全トランザクションログ記録
+- [x] ログ保持: 最小 7 年
+- [x] ログ改ざん検知（ハッシュチェーン）
+- [x] Real-time alerting (失敗率 > 1%, SLA 違反)
 
 ### Infrastructure
-☑ WAF 有効化（DDoS, SQL Injection 対策）
-☑ VPC 分離（データベースは Private Subnet）
-☑ Secrets Manager で認証情報管理
-☑ Network Policy: 最小権限原則
+- [x] WAF 有効化（DDoS, SQL Injection 対策）
+- [x] VPC 分離（データベースは Private Subnet）
+- [x] Secrets Manager で認証情報管理
+- [x] Network Policy: 最小権限原則
 
 ### Incident Response
-☑ インシデント対応計画書作成
-☑ 連絡先リスト整備
-☑ 定期的なドリル実施（年 2 回）
-☑ 法的通知手順確立
+- [x] インシデント対応計画書作成
+- [x] 連絡先リスト整備
+- [x] 定期的なドリル実施（年 2 回）
+- [x] 法的通知手順確立
 
 ### Testing
-☑ ペネトレーションテスト（年 1 回、外部業者）
-☑ セキュリティテストカバレッジ 100%
-☑ カオスエンジニアリング（年 2 回）
+- [x] ペネトレーションテスト（年 1 回、外部業者）
+- [x] セキュリティテストカバレッジ 100%
+- [x] カオスエンジニアリング（年 2 回）
 ```
 
 ### Day 3: Penetration Test
@@ -534,42 +534,42 @@ trivy image financial-api:latest
 攻撃手法: JWT トークン改ざん
 
 防御確認:
-- ✓ トークン署名検証: RS256 (秘密鍵がないと改ざん不可)
-- ✓ Expiration 確認: Token 有効期限チェック
-- ✓ Scope 検証: Token に含まれる権限確認
+- [x] トークン署名検証: RS256 (秘密鍵がないと改ざん不可)
+- [x] Expiration 確認: Token 有効期限チェック
+- [x] Scope 検証: Token に含まれる権限確認
 
-結果: ✓ 防御成功
+結果: 防御成功
 
 ### Red Team Attack 2: Data Exfiltration
 
 攻撃手法: SQL Injection 経由でデータベースから顧客情報を抽出
 
 防御確認:
-- ✓ Parameterized Query: SQL Injection 不可能
-- ✓ Database Access Logging: すべてのクエリが監査ログに
-- ✓ Row-level Security: 顧客は自分のデータのみアクセス可能
+- [x] Parameterized Query: SQL Injection 不可能
+- [x] Database Access Logging: すべてのクエリが監査ログに
+- [x] Row-level Security: 顧客は自分のデータのみアクセス可能
 
-結果: ✓ 防御成功
+結果: 防御成功
 
 ### Red Team Attack 3: DDoS
 
 攻撃手法: 大量リクエストで API ダウン
 
 防御確認:
-- ✓ Rate Limiting: Per User 100/min で throttle
-- ✓ AWS Shield: Layer 3/4 DDoS 対策
-- ✓ Auto Scaling: Lambda 並列度自動増加
+- [x] Rate Limiting: Per User 100/min で throttle
+- [x] AWS Shield: Layer 3/4 DDoS 対策
+- [x] Auto Scaling: Lambda 並列度自動増加
 
-結果: ✓ 防御成功 (応答時間増加が限定的)
+結果: 防御成功 (応答時間増加が限定的)
 ```
 
 ---
 
 ## セキュリティ Mob の成功要因
 
-✓ Threat Model を最初に作成（STRIDE で網羅的に）
-✓ 暗号化・鍵管理を AI + 自動化で実装
-✓ 監査ログは改ざん検知可能に設計
-✓ コード検査（SAST）と脆弱性スキャンを CI に組み込み
-✓ ペネトレーションテストで現実的な攻撃を想定
-✓ Compliance チェックリストで法務/監査対応を自動追跡
+- Threat Model を最初に作成（STRIDE で網羅的に）
+- 暗号化・鍵管理を AI + 自動化で実装
+- 監査ログは改ざん検知可能に設計
+- コード検査（SAST）と脆弱性スキャンを CI に組み込み
+- ペネトレーションテストで現実的な攻撃を想定
+- Compliance チェックリストで法務/監査対応を自動追跡

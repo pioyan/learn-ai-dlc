@@ -524,10 +524,10 @@ def charge_with_breaker(order_id, amount):
 
 ## マイクロサービス Mob の成功要因
 
-✓ Domain Event を中心に Service Boundary を引く
-✓ Event Contract（JSON Schema）を公開・共有
-✓ Async First の設計思想
-✓ 各チームが独立開発可能な構造
-✓ Distributed Tracing で全フロー可視化
-✓ Resilience pattern（Retry, Circuit Breaker）を埋め込み
-✓ End-to-End テストで統合検証
+- Domain Event を中心に Service Boundary を引く
+- Event Contract（JSON Schema）を公開・共有
+- Async First の設計思想
+- 各チームが独立開発可能な構造
+- Distributed Tracing で全フロー可視化
+- Resilience pattern（Retry, Circuit Breaker）を埋め込み
+- End-to-End テストで統合検証
