@@ -1420,6 +1420,7 @@
 
       var sidebarHeadingSyncState = {
         cleanup: null,
+        activeSidebarHref: '',
       };
 
       function clearSidebarHeadingSync() {
@@ -1455,8 +1456,38 @@
         return activeHeading ? activeHeading.id : '';
       }
 
+      function scrollSidebarLinkIntoView(link) {
+        var sidebar = document.querySelector('.sidebar');
+        if (!sidebar || !link) {
+          return;
+        }
+
+        var sidebarRect = sidebar.getBoundingClientRect();
+        var linkRect = link.getBoundingClientRect();
+        var padding = 24;
+        var isAboveViewport = linkRect.top < sidebarRect.top + padding;
+        var isBelowViewport = linkRect.bottom > sidebarRect.bottom - padding;
+
+        if (isAboveViewport || isBelowViewport) {
+          var linkTop = linkRect.top - sidebarRect.top + sidebar.scrollTop;
+          var targetScrollTop = sidebar.scrollTop;
+
+          if (isAboveViewport) {
+            targetScrollTop = Math.max(0, linkTop - padding);
+          } else if (isBelowViewport) {
+            targetScrollTop = Math.max(0, linkTop - sidebar.clientHeight + link.offsetHeight + padding);
+          }
+
+          sidebar.scrollTo({
+            top: targetScrollTop,
+            behavior: 'auto',
+          });
+        }
+      }
+
       function syncSidebarHeadings(vm, isHome) {
         clearSidebarHeadingSync();
+        sidebarHeadingSyncState.activeSidebarHref = '';
 
         if (isHome) {
           return;
@@ -1471,6 +1502,8 @@
         if (!currentPageLink || !currentPageLink.parentElement) {
           return;
         }
+
+        scrollSidebarLinkIntoView(currentPageLink);
 
         var sidebarHeadingLinks = Array.prototype.filter.call(
           currentPageLink.parentElement.querySelectorAll('ul a[href*="?id="]'),
@@ -1495,6 +1528,7 @@
           ticking = false;
 
           var activeHeadingId = findActiveHeadingId(headings);
+          var activeSidebarLink = null;
 
           sidebarHeadingLinks.forEach(function (link) {
             var item = link.parentElement;
@@ -1508,11 +1542,22 @@
 
             item.classList.toggle('active', isActive);
             if (isActive) {
+              activeSidebarLink = link;
               link.setAttribute('aria-current', 'location');
             } else {
               link.removeAttribute('aria-current');
             }
           });
+
+          if (!activeSidebarLink) {
+            activeSidebarLink = currentPageLink;
+          }
+
+          var activeSidebarHref = activeSidebarLink.getAttribute('href') || '';
+          if (activeSidebarHref !== sidebarHeadingSyncState.activeSidebarHref) {
+            sidebarHeadingSyncState.activeSidebarHref = activeSidebarHref;
+            scrollSidebarLinkIntoView(activeSidebarLink);
+          }
         }
 
         function requestHeadingSync() {
