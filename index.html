@@ -1423,6 +1423,7 @@
         activeSidebarHref: '',
         lockedHeadingId: '',
         unlockTimer: null,
+        verifyTimer: null,
       };
 
       function clearSidebarHeadingSync() {
@@ -1434,6 +1435,11 @@
         if (sidebarHeadingSyncState.unlockTimer) {
           window.clearTimeout(sidebarHeadingSyncState.unlockTimer);
           sidebarHeadingSyncState.unlockTimer = null;
+        }
+
+        if (sidebarHeadingSyncState.verifyTimer) {
+          window.clearTimeout(sidebarHeadingSyncState.verifyTimer);
+          sidebarHeadingSyncState.verifyTimer = null;
         }
 
         sidebarHeadingSyncState.lockedHeadingId = '';
@@ -1525,6 +1531,17 @@
         }, 900);
       }
 
+      function scheduleSidebarVisibilityCheck(link) {
+        if (sidebarHeadingSyncState.verifyTimer) {
+          window.clearTimeout(sidebarHeadingSyncState.verifyTimer);
+        }
+
+        sidebarHeadingSyncState.verifyTimer = window.setTimeout(function () {
+          scrollSidebarLinkIntoView(link);
+          sidebarHeadingSyncState.verifyTimer = null;
+        }, 120);
+      }
+
       function syncSidebarHeadings(vm, isHome) {
         clearSidebarHeadingSync();
         sidebarHeadingSyncState.activeSidebarHref = '';
@@ -1604,10 +1621,9 @@
           }
 
           var activeSidebarHref = activeSidebarLink.getAttribute('href') || '';
-          if (activeSidebarHref !== sidebarHeadingSyncState.activeSidebarHref) {
-            sidebarHeadingSyncState.activeSidebarHref = activeSidebarHref;
-            scrollSidebarLinkIntoView(activeSidebarLink);
-          }
+          sidebarHeadingSyncState.activeSidebarHref = activeSidebarHref;
+          scrollSidebarLinkIntoView(activeSidebarLink);
+          scheduleSidebarVisibilityCheck(activeSidebarLink);
         }
 
         function requestHeadingSync() {
