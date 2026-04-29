@@ -1479,13 +1479,9 @@
 
         if (isAboveViewport || isBelowViewport) {
           var linkTop = linkRect.top - sidebarRect.top + sidebar.scrollTop;
-          var targetScrollTop = sidebar.scrollTop;
-
-          if (isAboveViewport) {
-            targetScrollTop = Math.max(0, linkTop - padding);
-          } else if (isBelowViewport) {
-            targetScrollTop = Math.max(0, linkTop - sidebar.clientHeight + link.offsetHeight + padding);
-          }
+          var centeredOffset = Math.max(padding, (sidebar.clientHeight - link.offsetHeight) / 2);
+          var maxScrollTop = Math.max(0, sidebar.scrollHeight - sidebar.clientHeight);
+          var targetScrollTop = Math.min(maxScrollTop, Math.max(0, linkTop - centeredOffset));
 
           sidebar.scrollTo({
             top: targetScrollTop,
