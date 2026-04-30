@@ -1,7 +1,7 @@
 # モブワーク実践ガイド 3: ブラウンフィールド Mob Construction
 
 ## シナリオ
-既存 e-Commerce システムに「顧客360度ビュー」機能を追加する際の Mob Construction プロセス  
+既存 EC システムに「顧客360度ビュー」機能を追加する際の Mob Construction プロセス（ブラウンフィールド: 既存システムを前提にした改修・拡張）  
 （既存システムの分析・モダナイゼーション→新機能実装）
 
 ## 所要時間
@@ -29,7 +29,7 @@ Week 2: 新機能実装＆統合（4～5 日）
 - 監視: なし
 
 ### 問題点
-- コード整理がされていない（Fat Models）
+- コード整理がされていない（Fat Models: 責務が肥大化したモデル）
 - ビジネスロジックが UI 層に散在
 - トランザクション管理が曖昧
 - 変更の影響範囲が不明
@@ -109,7 +109,7 @@ AIへのプロンプト:
    - Repository パターンで既存 Oracle と接続
 
 5. AWS モダナイゼーション案:
-   - どう段階移行するか（Big Bang vs 段階的）
+    - どう段階移行するか（Big Bang: 一括切り替え vs 段階移行）
 ```
 
 #### 1-3. AI による逆解析結果
@@ -163,7 +163,7 @@ Transaction (Entity) × N
   │   ├─→ [PaymentRepository.findByCustomerId()]
   │   │   └─→ [Oracle: PAYMENT_HISTORY]
   │   │
-  │   └─→ [CustomerProfile DTO] ← Aggregate
+    │   └─→ [CustomerProfile DTO（画面返却用データ）] ← Aggregate
   │
   └─→ [JSON Response]
 
@@ -246,7 +246,7 @@ public class Customer {
 
 PO: 「360 度ビューにはどの情報が必須ですか？」
 
-テックリード: 「CSR が見る画面なので、
+テックリード: 「CSR（Customer Service Representative: 顧客対応担当）が見る画面なので、
            - 基本情報（名前、住所）
            - 過去 6 ヶ月の取引
            - 連絡先
@@ -453,10 +453,10 @@ public class CustomerLegacyController {
 }
 ```
 
-#### 2-2. Canary Deploy 計画
+#### 2-2. Canary Deploy（段階的リリース）計画
 
 ```markdown
-## Canary Deploy Strategy
+## Canary Deploy Strategy（段階的リリース戦略）
 
 ### Phase 1: Feature Flag（Week 2）
 - 新 API 実装完了
@@ -541,5 +541,5 @@ CREATE INDEX idx_payment_history_date ON PAYMENT_HISTORY(TRANSACTION_DATE, CUSTO
 - 逆解析ツール（AI）を活用して効率化
 - Domain Model は「理想形」から設計し、段階導入
 - Old API と新 API の共存期間をしっかり計画
-- Canary Deploy で低リスク移行
+- Canary Deploy（段階的リリース）で低リスク移行
 - パフォーマンス改善を可視化して信頼獲得

@@ -11,11 +11,11 @@
 
 ---
 
-## Week 1: Service Boundary Design（Domain Event 中心）
+## Week 1: Service Boundary Design（サービス境界設計）
 
 ### Day 1: Service Decomposition
 
-#### 1-1. Domain Event 駆動の設計
+#### 1-1. Domain Event（業務イベント）駆動の設計
 
 ```markdown
 ## 既存 Monolith での Order → Payment フロー
@@ -49,7 +49,7 @@
     └─ OrderPaidEvent 発行
 ```
 
-#### 1-2. Event Storming ワークショップ
+#### 1-2. Event Storming（イベントを起点に境界を整理する手法）
 
 Mob で大型ホワイトボード（または Miro）を使用:
 
@@ -79,7 +79,7 @@ Mob で大型ホワイトボード（または Miro）を使用:
 - RetryPayment
 - IssueRefund
 
-[Policy (受動的なイベントリスナー)]
+[Policy（イベントを受けて次の処理を起動するルール）]
 - OrderCreatedEvent → InitiatePayment (Payment Service)
 - PaymentFailedEvent → NotifyCustomer (Notification Service)
 - PaymentProcessedEvent → UpdateOrderStatus (Order Service)

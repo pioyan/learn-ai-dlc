@@ -13,7 +13,7 @@
 
 ## Week 1: Security by Design
 
-### Day 1: Threat Model 作成（Mob）
+### Day 1: STRIDE Threat Model（脅威モデル）作成（Mob）
 
 #### 1-1. STRIDE 分析
 
@@ -116,7 +116,7 @@ def add_integrity_header(response_body: str):
 脅威: ユーザーが「自分は高額送金を指示していない」と否定
 
 影響:
-- 纏争増加
+- 紛争増加
 - 監査指摘
 
 対策:
@@ -151,7 +151,7 @@ class AuditLog:
 
 ### I - Information Disclosure
 
-脅威: エラーメッセージから システム情報が漏える
+脅威: エラーメッセージからシステム情報が漏れる
 
 影響:
 - 攻撃者が脆弱性を推測できる

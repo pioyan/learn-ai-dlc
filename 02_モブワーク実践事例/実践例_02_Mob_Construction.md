@@ -4,6 +4,8 @@
 前セッションで確定した Unit-C（レコメンドエンジンコア）を、
 Domain Design → Logical Design → Code & Test の流れで実装する 2 週間のプロセス
 
+※ この実践例では DDD 用語（Aggregate、Value Object、Repository など）が頻出します。未経験の場合は先に [用語集](../03_学習サポート/B_用語集.md) の DDD 用語を参照してください。
+
 ## 所要時間（週ごと）
 - Week 1: Domain Design & Logical Design（Mob-driven, 4 日間、各日 6-8 時間）
 - Week 2: Code & Test & Integration（Mob + 個別作業の混在、4 日間）
@@ -61,7 +63,7 @@ AIに対して以下プロンプトを投げる:
 あなたは Domain-Driven Design の専門家です。
 
 【Context】
-e-Commerce プラットフォームの推薦エンジン
+EC プラットフォームの推薦エンジン
 
 【ビジネス要件】
 - 顧客の購買履歴から、相乗効果の高い商品を推薦
@@ -203,7 +205,7 @@ AI回答を受けて：
 開発者A: 「Customer Aggregate で全購買履歴を
         メモリに持つのは、大規模顧客だとOOMになりませんか？」
 
-テックリード: 「いい質問。レポジトリ層で
+テックリード: 「いい質問。リポジトリ層で
            『最近 6 ヶ月分』に限定する工夫をしましょう。
            これを Logical Design で詳細化します」
 ```
@@ -216,7 +218,7 @@ AI回答を受けて：
 # domain_model.py - 確定版
 
 # このファイルはドメイン言語の定義
-# インポートされるのは Logical Design と Application層
+# インポートされるのは Logical Design と Application 層
 ```
 
 ---
@@ -235,7 +237,7 @@ Domain Model を以下の NFR に対応させるため、
 Logical Architecture を設計してください。
 
 【NFR】
-- Latency: API < 200ms (p99)
+- Latency: API < 200ms（p99, 99パーセンタイル）
 - Throughput: 10,000 推薦/秒
 - Availability: 99.5%
 - Consistency: 相乗効果マトリクス変更は 30 秒以内に反映
@@ -248,7 +250,7 @@ Logical Architecture を設計してください。
 
 【質問】
 1. データ配置戦略（RDB vs NoSQL vs ベクトルDB）
-2. キャッシング戦略（何を、どこに、多久保つ）
+2. キャッシュ戦略（何を、どこに、どのくらい保持するか）
 3. スケーリング戦略（Lambda 並列度、DynamoDB キャパシティ）
 4. 監視・ロギング戦略
 
